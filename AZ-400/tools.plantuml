@@ -1,0 +1,116 @@
+@startmindmap "Client Libraries"
+
+title AZ-400 - Tools
+caption AZ-400 - Tools
+center footer The Azure DevOps landscape as mapped out in AZ-400
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+<style>
+
+    mindMapDiagram {
+        
+        LineColor lightblue
+        RoundCorner 5
+        BackgroundColor white
+        Shadowing 2.0
+
+        node {
+            FontColor black
+            LineColor black
+            BackgroundColor white
+            Shadowing 2.0
+            RoundCorner 25
+        }
+        :depth(0) {
+            LineColor white
+            BackgroundColor white
+            Shadowing 0.0
+        }
+        :depth(1) {
+            FontColor blue
+            BackgroundColor white
+            Shadowing 2.0
+        }
+
+        :depth(2) {
+            FontColor white
+            LineColor black
+            BackgroundColor black
+            Shadowing 2.0
+            RoundCorner 25
+        }
+
+        arrow {
+            LineStyle 4
+            LineThickness 0.5
+            LineColor green
+        }
+
+        boxless {
+            FontColor black
+            Margin 10
+            Padding 10
+            MaximumWidth 400
+        }
+    }
+</style>
+
+
++ <$osa_media_flash,scale=1.5>\nTools
+
+-- <$osa_lifecycle,scale=0.5> GitHub
+---_ GitHub CLI
+---_ GitHub Web Interface
+---_ GitHub Desktop
+---_ Urgent approvals
+----_ GitHub Mobile
+---_ On-premise
+----_ GitHub Enterprise
+--- Other Version Control Systems
+----_ GitLab
+----_ Azure Repos
+----_ BitBucket
+----_ Subversion
+----_ TFS
+-- <$osa_lifecycle,scale=0.5> Git
+--- Change Logs
+----_ git log
+----_ gitchangelog 
+----_ github-changelog-generator
+--- Cloning
+----_ Large repositories
+-----_ Shallow clone\ngit clone --depth
+-----_ VFS for Git\nrequires Git LFS
+-----_ Scalar
+---_ Git Credential Manager (Windows)
+
+
+++ <$osa_lifecycle,scale=0.5> Azure DevOps
++++_ On-premises
+++++_ Azure DevOps Server
++++_ Azure DevOps CLI
+++ Technical Debt
++++_ SonarCloud
++++_ NDepend
++++_ ReSharper
+
+++ Package Management
++++ Nuget
++++ NPM
++++ Maven
+
+++ Azure Pipelines
+
+@endmindmap
+
+
+
+
+

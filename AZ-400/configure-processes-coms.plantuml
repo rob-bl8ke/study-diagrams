@@ -1,0 +1,100 @@
+@startmindmap "Client Libraries"
+
+title AZ-400 - 10,000 Foot\nConfigure Processes and Communication
+caption AZ-400 - 10,000 Foot - Configure Processes and Communication
+center footer The Azure DevOps landscape as mapped out in AZ-400
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+<style>
+
+    mindMapDiagram {
+        
+        LineColor lightblue
+        RoundCorner 5
+        BackgroundColor white
+        Shadowing 2.0
+
+        node {
+            FontColor black
+            LineColor black
+            BackgroundColor white
+            Shadowing 2.0
+            RoundCorner 25
+        }
+        :depth(0) {
+            LineColor white
+            BackgroundColor white
+            Shadowing 0.0
+        }
+        :depth(1) {
+            FontColor blue
+            BackgroundColor white
+            Shadowing 2.0
+        }
+
+        :depth(2) {
+            FontColor white
+            LineColor black
+            BackgroundColor black
+            Shadowing 2.0
+            RoundCorner 25
+        }
+
+        arrow {
+            LineStyle 4
+            LineThickness 0.5
+            LineColor green
+        }
+
+        boxless {
+            FontColor black
+            Margin 10
+            Padding 10
+            MaximumWidth 400
+        }
+    }
+</style>
+
+
++ <$osa_media_flash,scale=1.5>\nSection Group A\n**Configure Processes and Communication**
+
+-- <$osa_lifecycle,scale=0.5> Planning & Feedback
+--- Analytics
+---- Cumulative Flow Diagram (CFD)
+-----_ Metrics
+------ Lead time
+------ Cycle time
+--- Work items
+----_ tied to
+----- Connected artifacts
+--- Branch Policies
+----_ enhance end-to-end traceability
+---_ Integrate pipelines
+---- Work tracking tools
+-----_ GitHub
+-----_ Azure Pipelines
+----_ Repository w/ Azure Boards
+----- Traceability Policies
+
+++ <$osa_lifecycle,scale=0.5> Collaboration & communication
++++_ documentation tools
+++++ Wiki
+++++ Process diagrams
++++_ actionable information
+++++ Custom Dashboards
++++_ release notes
+++++ Release Notes
+++++ API Documentation
+++++_ automation
++++++ Git history
++++_ notifications
+++++ Webhooks
+
+@endmindmap

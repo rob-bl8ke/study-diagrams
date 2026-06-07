@@ -1,0 +1,38 @@
+
+@startmindmap "System Designs Overview"
+
++ Systems Design
+++ Networking
++++_ clients and servers
++++_ peer to peer
++++_ IP
+++++_ IP packets
++++++_ No sense of order, no guarantee
++++++_ No guarantee, some might get lost
+
+
++++_ TCP (transmission control protocol)
+++++_ Built on top of IP\nOrdered and guaranteed
+
++++_ HTTP (hypertext transfer protocol)
+++++_ Builds on top of TCP
+
+-- Caching
+---_ consistent caching
+----_ around circle
+---_ rondezvous caching
+----_ highest score
+
+-- Communication
+---_ Monitor for\nregular updates
+---- Polling (pulling)
+-----_ every x seconds\n(set interval)
+---- Streaming (pushing)
+-----_ continuous
+---_ transfer massive files\nto many nodes
+---- Peer to peer
+-----_ Trackers
+-----_ Gossip (epimdemic protocol)
+
+
+@endmindmap

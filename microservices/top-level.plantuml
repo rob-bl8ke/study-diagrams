@@ -1,0 +1,50 @@
+@startmindmap "Microservices"
+
++ Microservices
+
+++ Type of opinionated SOA archtitecture
+++ Small autonomous services that work well together
++++ Properties
+++++ Size does not matter as much
+++++ Communicate over APIs, events and messages (no database integration)
+++++ High degree of autonomy
++++++ Independent Processes
+++++++ Change and deploy independently
++++++ **Small, and focused on doing one thing well**
+++++ Own their own data
++++++ Do NOT share databases
+
+++ 3 dimensions of scalability\n(envision 3 dimensions of a rubiks cube)
++++ **Functional decomposition (microservices)**
++++ Horizontal duplication
++++ Data Partitioning
+
+++ Represented via
++++ Hexagonals with lines drawn between them
++++ Hexagonal name based on what it does
+++++ Customer Service
+++++ Invoicing
+++++ Inventory
+++++ Shipping
+++++ Returns
+++ encapsulate data storage and retrieval, exposing data, via well-defined interfaces. So databases are hidden inside the service boundary.
+
+
+++ Advantages
++++ Allow the business domain to be modelled
++++ Allow you to mix and match technology
++++ Work on them in parrallel
++++ Developers understand their part of the system
++++ Allow flexibility
+
+++ Challenges
++++ SOA is about many small machines\n(not mainframes)
+++++ Networking
++++++ Latency
++++++ Networks can fail and packets can get lost
++++++ Transactions are distributed and much more difficult
++++++ You may have to ditch transactions and the safety they bring
+++++ New technologies can be used badly
+
+@endmindmap
+

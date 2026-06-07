@@ -1,0 +1,212 @@
+@startmindmap "Client Libraries"
+
+title AZ-400 - 10,000 Foot\nImplement an Instrumentation Strategy
+caption AZ-400 - 10,000 Foot - Implement an Instrumentation Strategy
+center footer The Azure DevOps landscape as mapped out in AZ-400
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+<style>
+
+    mindMapDiagram {
+        
+        LineColor lightblue
+        RoundCorner 5
+        BackgroundColor white
+        Shadowing 2.0
+
+        node {
+            FontColor black
+            LineColor black
+            BackgroundColor white
+            Shadowing 2.0
+            RoundCorner 25
+        }
+        :depth(0) {
+            LineColor white
+            BackgroundColor white
+            Shadowing 0.0
+        }
+        :depth(1) {
+            FontColor blue
+            BackgroundColor white
+            Shadowing 2.0
+        }
+
+        :depth(2) {
+            FontColor white
+            LineColor black
+            BackgroundColor black
+            Shadowing 2.0
+            RoundCorner 25
+        }
+
+        arrow {
+            LineStyle 4
+            LineThickness 0.5
+            LineColor green
+        }
+
+        boxless {
+            FontColor black
+            Margin 10
+            Padding 10
+            MaximumWidth 400
+        }
+    }
+</style>
+
+
++ <$osa_media_flash,scale=1.5>\nSection Group E\n**Implement an Instrumentation Strategy**
+
+-- <$osa_lifecycle,scale=0.5> Monitoring
+
+--- Tools
+---- Agent-based APM platforms
+---- Agentless APM platforms
+---- Microservices APM patforms
+---- Integrated APM platforms
+
+----_ used in
+----- Feedback Loop
+------_ **Monitor all applications and infrastructure**
+------_ combine resources in
+------- Azure resource groups
+------_ ensure quality
+------- Continuous Deployment
+------_ create
+------- Actionable Alerts
+--------_ with
+--------- Actions
+------_ prepare
+------- Dashboards
+------- Alerts
+------_ continuously
+------- Optimize
+--------_ tooling
+--------_ processes
+
+--- Access Control
+---- protect
+----- Sensitive information
+------ Log analytics
+------ Storage accounts
+------ Dashboards
+------_ restrict access to specific
+------- Services
+------- Persons
+------_ restrict with
+------- Firewalls
+------- Virtual Networks
+--------_ IP restrictions
+--------_ ...with exceptions
+------- RBAC
+
+--- Alerts
+----_ for
+----- Pipelines
+----_ require
+----- Actions
+------_ by
+------- Action Groups
+--------_ notified via
+--------- Azure Monitor
+--------- Service Health
+----_ set up by
+----- Subscription owner
+
+++ <$osa_lifecycle,scale=0.5> Analyze metrics
+
++++ Distributed Tracing
+++++_ like a
++++++ Call Stack
+++++++_ with
++++++++ Performance Profiler
++++++_ two views
+++++++ Transaction Diagnostics View
+++++++ Application Map View
+++++ Application Insights
+++++_ or without SDK enable
++++++ OpenTelemetry
++++++ OpenCensus
+
++++ Application Insights
+++++_ via
++++++ Auto-instrumentation
++++++ SDKs
+++++_ instrumentation options
++++++ Runtime Instrumentation
+++++++_ auto-instrumentation
+++++++_ checkbox option
+++++++_ no sdk
++++++ Buildtime Instrumentation
+++++++_ SDK
++++++ Client-side Instrumentation
+++++++_ Frontend 
++++++++_ HTML
++++++++_ CSS
++++++++_ JavaScript
+
++++ Azure Monitor
+++++_ consumes
++++++ Metrics
++++++ Logs
+++++++_ interrogated with
++++++++ Kusto Queries
++++++++_ and
+++++++++ Kusto Charts
++++++_ from
+++++++_ Applications, Operating Systems
+++++++_ Azure tenants, subscriptions, and resources
++++++_ to
+
+++++++ Insights
++++++++_ store, analyze
+++++++++ Metric Analytics
+++++++++ Log Analytics
+
+++++++ Integrated Tools
++++++++_ Logic Apps
++++++++_ Export APIs
++++++++_ to
+++++++++ Alerts
+++++++++ Auto-scale
+
+++++++ Visualizations
++++++++_ Dashboards and Views
++++++++_ Workbooks and Power BI
+
++++ Business Value
+++++ Identify
++++++_ valid metrics
+++++++ Success vs Failure
+++++++ Timing
+++++++ Throughput
+
++++ User Analytics
+++++_ Install SDK
++++++ Application Insights
++++++_ into
+++++++ Web App
+++++++ Mobile App
+++++ Design Stage
++++++_ How will you use the SDK?
++++++_ How will your new feature's success be measured?
++++++ Track
+++++++_ Business events, Usage demographics, Statistics
+++++++ Reports
++++++++_ User and Session
+
+++++++_ Custom Events
+
+@endmindmap
+
+
+
+

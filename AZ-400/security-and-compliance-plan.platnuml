@@ -1,0 +1,117 @@
+@startmindmap "Client Libraries"
+
+title AZ-400 - 10,000 Foot\nDevelop a Security and Compliance Plan
+caption AZ-400 - 10,000 Foot - Develop a Security and Compliance Plan
+center footer The Azure DevOps landscape as mapped out in AZ-400
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+
+<style>
+
+    mindMapDiagram {
+        
+        LineColor lightblue
+        RoundCorner 5
+        BackgroundColor white
+        Shadowing 2.0
+
+        node {
+            FontColor black
+            LineColor black
+            BackgroundColor white
+            Shadowing 2.0
+            RoundCorner 25
+        }
+        :depth(0) {
+            LineColor white
+            BackgroundColor white
+            Shadowing 0.0
+        }
+        :depth(1) {
+            FontColor blue
+            BackgroundColor white
+            Shadowing 2.0
+        }
+
+        :depth(2) {
+            FontColor white
+            LineColor black
+            BackgroundColor black
+            Shadowing 2.0
+            RoundCorner 25
+        }
+
+        arrow {
+            LineStyle 4
+            LineThickness 0.5
+            LineColor green
+        }
+
+        boxless {
+            FontColor black
+            Margin 10
+            Padding 10
+            MaximumWidth 400
+        }
+    }
+</style>
+
++ <$osa_media_flash,scale=1.5>\nSection Group D\n**Develop a Security and Compliance Plan**
+
+++ <$osa_lifecycle,scale=0.5> Automation of sensitive information
++++ Service connections
+++++_ store
++++++ External resources
+++++_ access via
++++++_ user permissions
++++++_ pipeline permissions
++++++_ project permissions
++++ External resources
+++++_ access via
++++++ Personal Access Tokens
++++++_ to
+++++++ Azure DevOps
+
++++ Secrets
+++++_ stored locally
++++++ Pipelines
+++++_ stored across pipelines
++++++ Variable Groups
+++++++_ centrally via
++++++++ Key Vaults
+++++_ be cautious of
++++++ Fork builds
++++++_ PATH
++++++_ Writing to logs
++++++_ Lock down
+++++++ Containers
++++++_ Use the
+++++++ Auditing service
++++ Secure Files
+++++_ stored in
++++++ Pipeline Library
+
+
+-- <$osa_lifecycle,scale=0.5> Scanning
+---_ before commit
+---- GitHooks
+-----_ pre-commit
+---_ after commit
+---- GitHub dependabot
+-----_ dependency vulnerabilities
+-----_ secrets scanning
+---_ pipeline-based
+---- Whitesource (Mend)
+---- Checkmarx
+---_ code quality
+---- SonarQube
+---- CodeQL
+
+@endmindmap

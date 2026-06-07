@@ -1,0 +1,259 @@
+@startmindmap "Client Libraries"
+
+title AZ-400 - 10,000 Foot\nDesign and Build Release Pipelines
+caption AZ-400 - 10,000 Foot - Design and Build Release Pipelines
+center footer The Azure DevOps landscape as mapped out in AZ-400
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+<style>
+
+    mindMapDiagram {
+        
+        LineColor lightblue
+        RoundCorner 5
+        BackgroundColor white
+        Shadowing 2.0
+
+        node {
+            FontColor black
+            LineColor black
+            BackgroundColor white
+            Shadowing 2.0
+            RoundCorner 25
+        }
+        :depth(0) {
+            LineColor white
+            BackgroundColor white
+            Shadowing 0.0
+        }
+        :depth(1) {
+            FontColor blue
+            BackgroundColor white
+            Shadowing 2.0
+        }
+
+        :depth(2) {
+            FontColor white
+            LineColor black
+            BackgroundColor black
+            Shadowing 2.0
+            RoundCorner 25
+        }
+
+        arrow {
+            LineStyle 4
+            LineThickness 0.5
+            LineColor green
+        }
+
+        boxless {
+            FontColor black
+            Margin 10
+            Padding 10
+            MaximumWidth 400
+        }
+    }
+</style>
+
+
++ <$osa_media_flash,scale=1.5>\nSection Group C\n**Design and Build Release Pipelines**
+
+-- <$osa_lifecycle,scale=0.5> Pipeline Automation
+--- Types
+---- Azure Pipelines
+----- Tasks
+------ Agents
+------- Agent Pools
+------_ Integrate with external tools
+------_ Built in tasks
+------_ Marketplace
+------_ Self-made
+------ Task Groups
+-------_ Reuse and Sequencing
+----- Variable Groups
+------_ Available across pipelines
+
+---- GitHub Actions
+-----_ not just CI, all events
+----_ defined
+----- YAML
+----- Designer
+--- Gates
+---- Quality Gates
+----- Pre-deployment
+----- Releases (deployments)
+
+--- Environments
+----_ YAML link to environment by **name**
+----_ assert
+----- Checks and approvals
+-----_ Who are the approvers
+-----_ When to deploy and from what branch?
+
+++ <$osa_lifecycle,scale=0.5> Implement Deployments
+
++++ Deployment Slots
++++ Load Balancing
+++++_ with
++++++ Azure Traffic Manager
++++++ Azure Web Apps
+++++ Lifecycle Hooks
++++++_ Enable initialization before routing traffic
++++++_ Testing after routing traffic
++++_ Types
+++++_ Run Once
+++++_ Rolling
+++++_ Canary
+++++_ Ring
++++_ Strategies
+++++ Blue/Green
++++++_ Two identifical environments
++++++_ One is live
++++++_ typically involves
+++++++ Router
+++++++ Load balancer
+++++_ Progressive Exposure
+++++ Feature Flags
++++++_ Hide functionality from release
+++++_ A/B Testing
++++ Job Dependencies
++++ Branch Strategy
+++++_ Use
++++++ Feature Branch
+++++++_ Bug fix
+++++++_ Feature
+++++_ Merge into
++++++ Release Branch
+++++++_ using
++++++++ PR
++++++ Main Branch
+++++++_ high quality
+++++++_ up to date
+++++ Hot Fixes
++++++_ Straight to release branch
++++++_ Merge back to main branch
+
+-- <$osa_lifecycle,scale=0.5> Package Management
+--- Package Management Tools
+---- Github Packages
+---- Azure Artifacts
+--- Package Feeds
+---- Artifact Feeds
+-----_ Store, manage, and group packages
+-----_ Control package sharing
+------ Public
+-------_ Nuget.org
+------ In-house, Public
+------ Internal
+------ Subsets
+
+--- Versioning
+---- Semantic versioning
+---- Calendar versioning
+
+-- <$osa_lifecycle,scale=0.5> Job Execution Order
+--- Types
+---- Multi-stage
+---- Parallel
+--- Scenarios
+----_ Microsoft hosted agents limited to public endpoints
+----_ On-premise agents can deploy Artifacts within VNet
+----_ Microsoft hosted agents limited to public endpoints
+----_ Containerized agents and hybrid agents
+--- Reusability
+---- Templates
+-----_ Repeatable stages, jobs and tasks
+----- Parameters
+----_ Variable Groups
+-----_ Environments, pipelines, stages, and tasks
+----_ Environments
+-----_ Checks and approvals
+
+-- <$osa_lifecycle,scale=0.5> Implement Pipelines
+
+--- CI/CD Platforms
+---- GitHub Actions
+---- CI/CD Platform
+--- Triggers
+----_ Types
+-----_ Continuous integration, Pull request validation, Scheduled, Gate check-in, Comment triggers, Pipeline
+----_ external
+----- REST APIs
+----_ internal
+----- Repositories
+
+--- Agents (Runners)
+---- DevOps
+----- Microsoft-hosted
+------_ differences
+------- Public
+------- Private
+----- Self-hosted
+------_ VNets and on-premise
+----_ grouped into
+----- Agent Pools
+
+
+++ <$osa_lifecycle,scale=0.5> Infrastructure as Code
+
++++ Code
+++++_ Treat like any other code
+++++_ Add to source control
+++++_ Lint, verify, valdate
+++++_ Tools
++++++ ARM Test Toolkit
++++++ Bicep Linter
++++_ approaches
+++++_ existing VMs\nconfig, compile, invoke
++++++ Azure Automation\nState Configuration (DSC)
++++++ PowerShell DSC
+++++_ new infrastructure
++++++ ARM
++++++ Bicep
+
++++_ scenarios
+++++ Static Environment
++++++_ Always the same
+++++ Transient Environment
++++++_ This version only
++++++_ Next version, new environment
+++++_ config, compile and invoke against
++++++ VMs
+
+++ <$osa_lifecycle,scale=0.5> Pipeline Maintenance
++++ Monitor pipeline health
+++++_ Reports
++++++ Pass Rate
++++++ Test Failures
++++++ Pipeline Duration
+++++_ Optimization Tools
++++++ Pipeline Artifacts
++++++ Pipeline Caching
++++ Build Agents
+++++_ Determine load and capacity requirements
+++++_ More agents required?
+++++_ examine
++++++_ No. of team members
++++++_ No. of running pipelines
++++++_ No. of team members
++++++_ Impact of manual approvals (agent paused)
++++++_ Depth of queue
+
++++ Retention Strategy
+++++ Retention Policies
++++++_ Pipeline
++++++_ Release (classic)
++++++_ Test
+
+@endmindmap
+
+
+
+

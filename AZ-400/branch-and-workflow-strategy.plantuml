@@ -1,0 +1,177 @@
+@startmindmap "AZ-400 - Manage Git Branches and Workflows"
+
+title AZ-400\nSection Group B - Manage Git Branches and Workflows
+caption AZ-400 - Manage Git Branches
+center footer ...
+
+!define osaPuml https://raw.githubusercontent.com/Crashedmind/PlantUML-opensecurityarchitecture2-icons/master
+!include osaPuml/Common.puml
+!include osaPuml/User/all.puml
+!include osaPuml/Hardware/all.puml
+!include osaPuml/Misc/all.puml
+!include osaPuml/Server/all.puml
+!include osaPuml/Site/all.puml
+
+<style>
+
+    mindMapDiagram {
+        
+        LineColor lightblue
+        RoundCorner 5
+        BackgroundColor white
+        Shadowing 2.0
+
+        node {
+            FontColor white
+            LineColor black
+            BackgroundColor black
+            Shadowing 2.0
+            RoundCorner 25
+        }
+        :depth(0) {
+            FontColor black
+            LineColor white
+            BackgroundColor white
+            Shadowing 0.0
+        }
+        :depth(1) {
+            FontColor black
+            BackgroundColor darkgrey
+            Shadowing 2.0
+        }
+
+        arrow {
+            LineStyle 4
+            LineThickness 0.5
+            LineColor green
+        }
+
+        boxless {
+            FontColor black
+            Margin 10
+            Padding 10
+            MaximumWidth 400
+        }
+    }
+</style>
+
++ <$osa_media_flash,scale=1.5>\nManage Git Branches\nand Workflows
+
+++ Trunk-based Development
++++ Definition
+++++_ Single trunk/master/mainline branch
+++++_ Everyone clones the branch, makes changes and pushes directly to the main branch
+++++_ No branches, no pull requests
+++++_ Simple branching strategy
++++_ True enabler of/strongly associated with
+++++ Continuous Deployment
++++ Requires
+++++ High team maturity
+++++ Feature Flags
++++++_ critical
+++++++_ frequent merges
+++++++_ half baked features not visible to users
+++++_ Quality automated tests
++++++ TDD
++++++ DDD
++++_ Suitable if...
+++++_ Mature team that understand the importance of automation and maintains thorough test coverage.
+++++_ You don't care about quality
++++_ **Madness Level**
+++++ Depends
++++++_ on how it is used and who is using it
+
+++ Feature Branches\n(GitHub Workflow)
+
++++ Definition
+++++_ Similar to trunk-based but... create features (small chunks)
+++++_ Small delivery cycles between a couple hours to a couple of days
+++++_ Create
++++++ PR
+++++++_ code reviews
+++++++_ Sent to QA Testing
+++++++_ If QA passes, **merge** to main
++++_ True enabler of
+++++ Continous Integration
++++++_ and if applied correctly
+++++++ Continuous Delivery
+++++_ speed up software change\nand maintain quality
+++++_ with
++++++_ Azure CLI
++++++_ Azure DevOps CLI
++++++_ Integrate with
+++++++_ Git and Agile tools
+
++++_ Very useful to have
+++++ Feature Flags
++++++_ for long running features
+
++++ Main Branch
+++++_ Always
++++++ Deployable
+++++++_ No broken code\nalways functional
+++++_ Protected by
++++++ Policies
+++++++_ Pull Requests
+++++++_ Code Reviews
+++++++_ Successful Builds
+++++++_ Passing Unit Tests
+
++++_ used for
+++++ New Features
+++++ Bug Fixes
+++++ Hot Fixes
++++_ Suitable for...
+++++_ Small self-sufficient teams, small code bases and you know how to split work so that it can be done fast
+++++_ Microservices and distributed high-scale cloud architectures
+++++_ Blue/Green, A/B and Canary deployments
++++_ **Madness Level**
+++++ Low
+
+++ Fork Branching
++++ Definition
+++++_ Fork whole repository
+++++_ Work on a feature and create a PR back to the upstream
++++ Advantage
+++++_ Do not need to have access to the original repository
+++++_ Yours when you fork it
++++_ Suitable for...
+++++_ Open-Source, Organizational Inner-Source, and very large teams
++++_ **Madness Level**
+++++ Low
+
+-- Release Branching
+---_ Longer lasting branches (weeks or months)
+---_ Different teams may be working on different release branches
+---_ Complications occur with hot fixes and bug fixes
+---_ Anything merged to the main branch needs to be applied on every other release branch
+---_ There is no continuous anything...
+---_ Low frequency deployments
+---_ Single word to associate with this branching strategy is **Waterfall (faking Agile)**
+---_ Run away, unless your solutions absolutely MUST support multiple versions
+---_ Might need a dedicated person to branch, validate, and merge.
+---_ **Madness Level**
+---- Medium
+---_ Suitable if...
+----_ Need to maintain backward compatibility and apply hot fixes to multiple releases
+
+-- Git Flow Branching
+---_ From the main branch create a dev branch and then off dev create Feature-1, Feature-2 etc. Create release branches off the dev branch.
+---_ Everything needs to be merged, ultimately, to the main branch. Hot fixes and bugs are an absolute pain.
+---_ Requires a dedicated full time release manager
+---_ Get rid of it
+----_ **VERY BAD FOR CONTINUOUS INTEGRATION**
+---_ **Madness Level**
+---- High
+
+-- Environment Branching
+---_ A dev branch and then a branch for every environment (staging, qa, prod)
+---_ Also have release branches (release-1, release-2, release-3...) merges multiplied by the no. of releases in paralllel
+---_ Hot fixes and bug fixes are a nightmare.
+---_ The concept is flawed, as a release can be deployed to different environments.
+---_ Suitable...
+----_ **NEVER**
+---_ **Madness Level**
+---- Insane
+
+@endmindmap
