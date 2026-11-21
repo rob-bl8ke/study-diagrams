@@ -1,0 +1,125 @@
+@startuml
+skinparam shadowing false
+skinparam activity {
+  BackgroundColor White
+  BorderColor #36536B
+  FontColor #1F2D3A
+  DiamondBackgroundColor #F7FBFF
+  DiamondBorderColor #36536B
+  BarColor #36536B
+}
+
+start
+
+partition "Human — Day Shift" {
+  :1. Receive idea or client brief;
+  note right
+    Input: Slack message, brief, or
+    domain expert meeting transcript.
+  end note
+  :2. Clear context and invoke Grill Me skill;
+}
+
+partition "Grill Me Skill" {
+  :3. Sub-agent explores codebase;
+  note right
+    Sub-agent burns tokens on exploration;
+    only a summary is returned to the orchestrator.
+  end note
+  repeat
+    :4. Ask one question with recommended answer;
+    :5. Human answers or accepts recommendation;
+  repeat while (More open questions?) is (yes) not (no)
+  :6. Shared design concept established;
+}
+
+partition "Human — Day Shift" {
+  :7. Invoke Write PRD skill;
+}
+
+partition "Write PRD Skill" {
+  :8. Explore repo and identify modules to modify;
+  :9. Produce PRD;
+  note right
+    Includes: problem statement, solution,
+    user stories, implementation decisions,
+    modules to modify, out-of-scope items.
+  end note
+}
+
+partition "Human — Day Shift" {
+  :10. Invoke Write PRD to Issues skill;
+}
+
+partition "Write PRD to Issues Skill" {
+  :11. Explore repo;
+  :12. Draft vertically-sliced issues as DAG;
+  note right
+    Each issue cuts through all layers
+    (DB, API, UI) — tracer bullets.
+    Blocking relationships form a
+    directed acyclic graph.
+  end note
+}
+
+partition "Human — Day Shift" {
+  :13. Review Kanban board for vertical slices;
+  if (All issues are vertical slices?) then (yes)
+  else (no)
+    #LightPink:14. Give corrective feedback; Issues skill revises;
+    note right
+      Reject horizontal slices.
+      Require visible end-to-end
+      outcomes per issue.
+    end note
+  endif
+  :15. Save issues locally; human departs (AFK);
+}
+
+partition "AFK Implementation — Ralph Loop" {
+  note right
+    Sand Castle variant: Planner identifies
+    parallelisable issues. Each runs in a
+    sandboxed git worktree. Merger agent
+    resolves conflicts. Sonnet implements;
+    Opus reviews.
+  end note
+  repeat
+    :16. Pick next AFK issue by priority;
+    note right
+      Priority: critical bugs → dev infra
+      → tracer bullets → polish / refactor.
+    end note
+    :17. Explore repo;
+    :18. Write failing tests first (TDD — red);
+    :19. Implement until tests pass (TDD — green);
+    :20. Run feedback loops (tests + type-check);
+    if (All checks pass?) then (yes)
+    else (no)
+      #LightPink:21. Fix errors and re-run checks;
+    endif
+  repeat while (AFK issues remain?) is (yes) not (no)
+}
+
+partition "Human — QA and Code Review" {
+  :22. Clear context window;
+  :23. Run automated review with coding standards pushed;
+  note right
+    Standards are pushed to the reviewer;
+    the implementer pulls them on demand.
+    Fresh context keeps reviewer in smart zone.
+  end note
+  :24. Human QA — inspect output and apply taste;
+  if (New issues or defects found?) then (yes)
+    #LightPink:25. Add new issues to Kanban board;
+    note right
+      Board keeps growing;
+      loop back to AFK phase.
+    end note
+  else (no)
+  endif
+  :26. Share with team for full review;
+}
+
+stop
+@enduml
